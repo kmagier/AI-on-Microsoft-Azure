@@ -77,6 +77,7 @@ Usługa wykorzystuje trzy kluczowe aspekty dla zrozumienia języka:
 Przykładowe przypadki użycia:
 
 * Chatbot wspomagający rejestrację do lekarza: np. po wpisaniu przez użytkownika frazy: "Jak mogę się zarejestrować do lekarza?" bot może zwrócić link do strony z niezbędnymi informacjami lub listą lekarzy i sposobem kontaktu
+* W wyszukiwarce sklepów internetowych; która na podstawie zapytania np. "Gdzie kupię skarpetki w Warszawie", zwróci listę sklepów z ich adresem.
 
 ##### 2.3. How to
 
@@ -101,4 +102,47 @@ Wariant **Standard**:
 * Możliwe 50 transakcji/sekunda
 * Zapytania tekstowe - $1.50 za 1000 transakcji
 * Zapytania z użyciem mowy - $5.50 za 1000 transakcji
+
+#### 3. Text Analytics API
+
+##### 3.1. Przedstawienie usługi
+
+Usługa Text Analytics API jest jedną z usług wchodzących w skład Cognitive Services. Została stworzona, by ułatwić pozyskiwanie informacji z tekstu. Z jej pomoca można zidentyfikować język, opinię, wyróżnić kluczowe frazy oraz rozpoznać encje w tekście.
+
+##### 3.2. Przypadki użycia
+
+* Do analizy nastrojów społecznych na podstawie sekcji komentarzy pod profilem na twitterze/facebook'u partii politycznej lub urzędu
+* Do rozpoznawania języka w translatorze internetowym(gdy nie wiemy w jakim języku napisany jest tekst, który chcemy tłumaczyć)
+
+##### 3.3. How to
+
+Aby użyć serwisu, należy stworzyć nowy zasób na platformie Azure. W Azure Marketplace należy wyszukać usługi Text Analytics, a następnie ją utworzyć.
+
+Po utworzeniu usługi, korzystając z jej klucza, możemy wysyłać zapytania pod endpoint określający funkcję usługi, z której chcemy skorzystać, tj. identyfikacja języka, opinii, podział na frazy kluczowe lub rozpoznawanie encji.
+
+Po wysłaniu zapytania otrzymujemy odpowiedź w formacie JSON, która zawiera informacje:
+
+* dla usługi rozpoznawania języka, zwraca informację o tym, w jakim języku został napisany tekst oraz wartość dopasowania
+* dla usługi identyfikacji opinii, zwraca informację o tym, czy opinia jest negatywna(wartość 0-0.49), czy opinia jest neutralna(wartość 0.5), czy pozytywna(wartość 0.5+)
+* dla usługi wyróżniającej frazy kluczowe, zwraca listę kluczowych fraz znalezionych w danym dokumencie
+* dla usługi rozpoznawania encji, zwraca rozpoznane encje wraz z ich kategoriami i podkategoriami
+
+##### 3.4. Pricing
+
+Usługa dostępna jest w kilku wariantach **Free**, **Standard**, **S0**, **S1**, **S2**, **S3**, **S4** :
+
+Wariant **Free**:
+
+* 5000 transakcji/miesiąc
+
+Wariant **Standard**:
+
+* 0-500 000 rekordów tekstowych - $2 za 1000 rekordów
+* 0.5M-2.5M rekordów tekstowych - $1 za 1000 rekordów
+* 2.5M-10M rekordów tekstowych - $0.5 za 1000 rekordów
+* 10M+ rekordów tekstowych - $0.25 za 1000 rekordów
+
+Warianty **S0**-**S4** wymagają stałej miesięcznej opłaty w ramach której do wykorzystania jest konkretna ilość transakcji w miesiącu; po przekroczeniu której opłata naliczana jest za każde kolejne 1000 transakcji, przy czym najtańszą opcją jest wariant **S0** (natomiast za każde 1000 transakcji powyżej limitu płacimy najwięcej), natomiast najdroższym wariantem jest **S4** (jednak opłata za transakcje powyżej limitu jest najniższa)
+
+
 
