@@ -1,73 +1,85 @@
-This folder contains a Bot Project created with Bot Framework Composer.
+Ten folder zawiera projekt bota stworzonego przy użyciu Bot Framework Composer.
 
-The full documentation for Composer lives here:
-https://github.com/microsoft/botframework-composer
+By przetestować działanie bota lokalnie, należy otworzyć ten folder w aplikacji Bot Framework Composer a następnie kliknąć na "Start Bot".
 
-To test this bot locally, open this folder in Composer, then click "Start Bot"
+## Projekt - Bot wspomagający pracę dziekanatu
 
-## Provision Azure Resources to Host Bot
+##### 1. Use case
 
-This project includes a script that can be used to provision the resources necessary to run your bot in the Azure cloud. Running this script will create all of the necessary resources and return a publishing profile in the form of a JSON object.  This JSON object can be imported into Composer's "Publish" tab and used to deploy the bot.
+Utworzony bot ma wspomagać pracę dziekanatu Wydziału Elektrycznego. Bot na podstawie kilku pytań, pomaga użytkownikowi otrzymać informację nt. z kim powinien sie kontaktować w celu rozwiązania swoich problemów na podstawie swojego kierunku studiów, stopnia studiów, trybu studiów oraz posiadania lub braku statusu studenta. Użytkownik, po przejściu całej przygotowanej ścieżki, w wyniku otrzymuje odpowiedź nt. tego z kim konkretnie powinien się skontaktować, wraz z informacjami kontaktowymi, lub jak może pewne problemy rozwiązać korzystając z funkcjonalności internetowego systemu obsługi dziekanatu ISOD.
 
-* From this project folder, navigate to the scripts/ folder
-* Run `npm install`
-* Run `node provisionComposer.js --subscriptionId=<YOUR AZURE SUBSCRIPTION ID> --name=<NAME OF YOUR RESOURCE GROUP> --appPassword=<APP PASSWORD> --environment=<NAME FOR ENVIRONMENT DEFAULT to dev>`
-* You will be asked to login to the Azure portal in your browser.
-* You will see progress indicators as the provision process runs. Note that it will take roughly 10 minutes to fully provision the resources.
+Bot zakłada następujące scenariusze:
 
-It will look like this:
-```
-{
-  "accessToken": "<SOME VALUE>",
-  "name": "<NAME OF YOUR RESOURCE GROUP>",
-  "environment": "<ENVIRONMENT>",
-  "settings": {
-    "applicationInsights": {
-      "InstrumentationKey": "<SOME VALUE>"
-    },
-    "cosmosDb": {
-      "cosmosDBEndpoint": "<SOME VALUE>",
-      "authKey": "<SOME VALUE>",
-      "databaseId": "botstate-db",
-      "collectionId": "botstate-collection",
-      "containerId": "botstate-container"
-    },
-    "blobStorage": {
-      "connectionString": "<SOME VALUE>",
-      "container": "transcripts"
-    },
-    "luis": {
-      "endpointKey": "<SOME VALUE>",
-      "authoringKey": "<SOME VALUE>",
-      "region": "westus"
-    },
-    "MicrosoftAppId": "<SOME VALUE>",
-    "MicrosoftAppPassword": "<SOME VALUE>"
-  }
-}```
+1. Użytkownik chce złożyć wniosek, ale nie wie jak, oraz nie wie jakie są wnioski
+2. Użytkownik chce się skontaktować z pracownikiem dziekanatu, ale nie wie z kim konkretnie
+3. Użytkownik chce się skontaktować z prodziekanem, ale nie wie jak powinen to zrobić
 
-When completed, you will see a message with a JSON "publishing profile" and instructions for using it in Composer.
+Pierwszym etapem jest zapytanie użytkownika, którą z powyższych czynności chce wykonać: 
 
+- Złożyć wniosek
+- Skontaktować się z pracownikiem dziekanatu
+- Skontaktować się z prodziekanem
 
-## Publish bot to Azure
+Następnie w zależności od wybranej opcji:
 
-To publish your bot to a Azure resources provisioned using the process above:
+1. Dla opcji złożenia wniosku, bot wyświetla wszystkie możliwe wnioski i prosi użytkownika o wybranie konkretnego wniosku, nastepnie bot prosi o informację o posiadaniu lub braku statusu studenta. Jeżeli użytkownik ma status studenta, otrzymuje informację o tym, że wniosek można złożyć przez ISOD; jeżeli użytkownik nie posiada statusu, otrzymuje informację, skąd można pobrać wniosek i jak go można złożyć
+2. Dla opcji kontaktu z pracownikiem dziekanatu, użytkownik musi odpowiedzieć na serię pytań z sugerowanymi odpowiedziami, które mają doprowadzić do nakierowania użytkownika na odpowiednią osobę. Po określeniu swojego typu studiów, stopnia oraz kierunku, użytkownik otrzymuje kontakt do pracownika dziekanatu, z którym powinien się skontaktować.
+3. Dla opcji kontaktu z prodziekanem, użytkownik musi odpowiedzieć na pytanie dotyczące posiadania lub braku statusu studenta. Jeżeli posiada status studenta - otrzymuje informację o tym, jak może się zapisać na konsultacje za pośrednictwem systemu ISOD, jeśli nie, musi parę pytań(podać swoje imię i nazwisko, numer albumu i e-mail), następnie na podstawie tych informacji otrzymuje numerek w systemie konsultacji oraz potwierdzenie na podany adres e-mail.
 
-* Open your bot in Composer
-* Navigate to the "Publish" tab
-* Select "Add new profile" from the toolbar
-* In the resulting dialog box, choose "azurePublish" from the "Publish Destination Type" dropdown
-* Paste in the profile you received from the provisioning script
+##### 2. Architektura
 
-When you are ready to publish your bot to Azure, select the newly created profile from the sidebar and click "Publish to selected profile" in the toolbar.
+Bot składa się głównego dialogu nazwanego **Bot-project** oraz z 10 innych dialogów, z których 7 dialogów odpowiada za kolejne etapy przepływu, pozwalające uzyskać od użytkownika coraz bardziej szczegółowe informacje, oraz 3 dialogi pomocnicze, dla pomocy, akcji rozpoczynającej zadawanie pytań przez bota oraz dla opcji anulowania dialogu, gdyby użytkownik chciał rozpocząć interakcję z botem od początku.
 
-## Refresh your Azure Token
+Specyfikacja dialogów i triggerów:
 
-When publishing, you may encounter an error about your access token being expired. This happens when the access token used to provision your bot expires.
+1. **Dialog Bot-project**
 
-To get a new token:
+   Zawiera 4 triggery; jeden o nazwie **Greeting**, który reaguje po nawiązaniu kontaktu odpowiada wiadomością powitalną, oraz 3 pomocnicze: 
 
-* Open a terminal window
-* Run `az account get-access-token`
-* This will result in a JSON object printed to the console, containing a new `accessToken` field.
-* Copy the value of the accessToken from the terminal and into the publish `accessToken` field in the profile in Composer.
+   * **pomoc** - który po wpisaniu frazy "pomoc" wyświetla informację, by podążać za wskazanymi propozycjami, oraz, że możliwe jest rozpoczęcie interakcji od początku po wpisaniu frazy "anuluj".
+   * **start** - który uruchamia przepływ po wpisaniu frazy "start"
+   * **anuluj** - który pozwala użytkownikowi rozpocząć rozmowę od początku, kasując wszystkie dotychczas zebrane informacje
+
+2. Dialog **Pracownik**
+
+   Dialog uruchamiany jest po wybraniu opcji "Konsultacja z pracownikiem". Zawiera zapytanie  **Prompt with multi-choice** do użytkownika dotyczące trybu studiów(stacjonarne lub niestacjonarne). Na podstawie odpowiedzi z wykorzystaniem instrukcji **Switch **podejmuje decyzję:
+
+   * Jeżeli studia stacjonarne, to kieruje do dialogu, **KonsultacjePracownik**, który zawiera kolejne pytania, pozwalające zebrać więcej informacji o użytkowniku
+   * Jeżeli studia niestacjonarne, to bot zwraca dane kontaktowe pracownika odpowiedzialnego za studia niestacjonarne na Wydziale Elektrycznym, ponieważ obecnie zajmuje się tym jeden pracownik.
+
+3. Dialog **KonsultacjePracownik**
+
+   Użytkownik przechodzi do tego dialogu, z dialogu **Pracownik**, w którym musiał odpowiedzieć na pytanie dotyczące trybu studiów. W tym dialogu użytkownik określa w elemencie **Prompt with multi-choice** swój stopień studiów(inżynierskie, magisterskie, doktoranckie), następnie w zależności od wyboru, korzystając z instrukcji **Switch** przenoszony jest do jednego z trzech dialogów **KonsultacjeInz**, **KonsultacjeMgr** lub **KonsultacjeDr**
+
+4. Dialog **KonsultacjeInz**
+
+   Dialog dla użytkowników będących studentami studiów inżynierskich. Użytkownik przechodzi do tego dialogu z dialogu **KonsultacjePracownik**, na tym etapie bot ma informację o trybie studiów oraz o stopniu. W tym dialogu użytkownik w elemencie **Prompt with multi-choice** określa swój kierunek studiów. Po wybraniu kierunku studiów, użytkownikowi zwracana jest informacja z danymi kontaktowymi do pracownika, z którym powinien się kontaktować.
+
+5. Dialog **KonsultacjeMgr**
+
+   Dialog dla użytkowników będących studentami studiów magisterskich. Reszta analogicznie jak w dialogu **KonsultacjeInz**
+
+6. Dialog**KonsultacjeDr**
+
+   Dialog dla użytkowników będących studentami studiów doktoranckich. Użytkownik otrzymuje informację z danymi kontaktowymi do pracownika, z którym powinien się kontaktować, ponieważ obecnie za te studia odpowiedzialna jest tylko jedna osoba, więc zbieranie kolejnych informacji jest zbędne.
+
+7. Dialog **Prodziekan-dialog**
+
+   Dialog uruchamiany po wybraniu opcji "Konsultacje z prodziekanem ds. studiów". Użytkownik w tym dialogu otrzymuje najpierw pytanie w elemencie **Prompt with multi-choice** o posiadanie lub brak statusu studenta. Jeśli użytkownik posiada status, zwracana jest odpowiedź z informacją, jak może się zarejestrować na konsultacje za pośrednictwem systemu ISOD, jeśli nie posiada statusu studenta, w serii pytań z wykorzystaniem elementów **Prompt for text** oraz **Prompt for a number** musi podać swoje imię i nazwisko, adres e-mail oraz nr albumu. Na podstawie tych informacji użytkownik jest zapisywany na konsultacje przez pracownika dziekanatu.
+
+8. Dialog **Wniosek-dialog**
+
+   Dialog uruchamiany po wybraniu opcji "Chcę złożyć wniosek". Użytkownik otrzymuje nazwy możliwych do złożenia wniosków w postaci listy(**Prompt with multi-choice**), z której musi wybrać jeden(np. podając jego liczbę). Następnie otrzymuje pytanie o posiadanie lub brak statusu studenta; jeśli posiada status, to dostaje informację o tym, jak można złożyć wniosek za pośrednictwem systemu ISOD, jeśli nie posiada statusu studenta; dostaje informację o tym, skąd może pobrać dany wniosek i jak może go złożyć w inny sposób.
+
+9. Dialog **Start**
+
+   Dialog uruchamiany na samym początku, po wpisaniu przez użytkownika frazy "start" za pomocą triggera o nazwie **start**. Dialog uruchamia przepływ.
+
+10. Dialog **Pomoc**
+
+    Dialog uruchamiany po wpisaniu przez użytkownika frazy "pomoc" za pomocą triggera o nazwie **pomoc**. Zwraca informację o podążaniu za sugerowanymi odpowiedziami, by uniknąć problemów, oraz o możliwości rozpoczęcia interakcji od początku po wpisaniu frazy "anuluj"
+
+11. Dialog **Anuluj**
+
+    Dialog uruchamiany po wpisaniu przez użytkownika frazy "anuluj" za pomocą triggera o nazwie **anuluj**. Kasuje podane do tej pory przez użytkownika dane oraz przenosi go do dialogu **Start** by móc rozpocząć interakcję jeszcze raz.
+
