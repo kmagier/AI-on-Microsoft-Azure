@@ -1,0 +1,14 @@
+[import](common.lg)
+
+# ChoiceInput_Prompt_j3iDxG()
+- Jakiego kierunku jest Pan/Pani studentem/studentką?
+# SendActivity_zAIyAA()
+- ``` Proszę skontaktować się z Panią Pauliną Borkowicz
+-Tel.: +48 22 234 5980
+-E-mail: paulina.borkowicz@ee.pw.edu.pl
+```
+# SendActivity_EQRexX()
+- ``` Proszę skontaktować się z Panią Joanną Sawicką
+-Tel.: +48 22 234 7228
+-E-mail: joanna.sawicka@ee.pw.edu.pl
+```

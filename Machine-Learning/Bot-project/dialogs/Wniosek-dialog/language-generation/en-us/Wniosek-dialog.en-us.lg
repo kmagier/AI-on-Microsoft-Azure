@@ -1,0 +1,12 @@
+[import](common.lg)
+
+# ChoiceInput_Prompt_nI6ta9()
+- Który wniosek chce Pan/Pani złożyć? Dostępne wnioski:
+# SendActivity_f2BViT()
+- Wybrałeś ${user.documentType}
+# ChoiceInput_Prompt_xXXoH4()
+- Czy posiada Pan/Pani status studenta/studentki?
+# SendActivity_ATDjGK()
+- Wniosek ${user.documentType} należy złozyć przez portal ISOD korzystając z panelu "Moje wnioski/podania"
+# SendActivity_ie6snI()
+- Wniosek "${user.documentType}" należy pobrać ze strony https://isod.ee.pw.edu.pl/isod-portal/dokumenty a następnie wypełnić i wysłać na adres e-mail dziekanatu, lub przynieść osobiście.

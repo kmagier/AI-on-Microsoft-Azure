@@ -1,0 +1,83 @@
+{
+  "$kind": "Microsoft.AdaptiveDialog",
+  "$designer": {
+    "id": "8UByeU",
+    "name": "KonsultacjeMgr-dialog",
+    "description": ""
+  },
+  "autoEndDialog": true,
+  "defaultResultProperty": "dialog.result",
+  "triggers": [
+    {
+      "$kind": "Microsoft.OnBeginDialog",
+      "$designer": {
+        "name": "BeginDialog",
+        "description": "",
+        "id": "adpQPb"
+      },
+      "actions": [
+        {
+          "$kind": "Microsoft.ChoiceInput",
+          "$designer": {
+            "id": "j3iDxG"
+          },
+          "defaultLocale": "en-us",
+          "disabled": false,
+          "maxTurnCount": 3,
+          "alwaysPrompt": false,
+          "allowInterruptions": true,
+          "prompt": "${ChoiceInput_Prompt_j3iDxG()}",
+          "unrecognizedPrompt": "",
+          "invalidPrompt": "",
+          "defaultValueResponse": "",
+          "choiceOptions": {
+            "includeNumbers": true,
+            "inlineOrMore": ", or ",
+            "inlineOr": " or ",
+            "inlineSeparator": ", "
+          },
+          "property": "user.fieldOfStudy",
+          "outputFormat": "value",
+          "style": "suggestedAction",
+          "choices": [
+            "Automatyka i robotyka stosowana",
+            "Elektrotechnika",
+            "Informatyka stosowana"
+          ],
+          "recognizerOptions": {
+            "recognizeOrdinals": true,
+            "recognizeNumbers": true
+          }
+        },
+        {
+          "$kind": "Microsoft.IfCondition",
+          "$designer": {
+            "id": "oeZwCT"
+          },
+          "condition": "=user.fieldOfStudy=='Automatyka i robotyka stosowana'",
+          "actions": [
+            {
+              "$kind": "Microsoft.SendActivity",
+              "$designer": {
+                "id": "zAIyAA"
+              },
+              "activity": "${SendActivity_zAIyAA()}"
+            }
+          ],
+          "elseActions": [
+            {
+              "$kind": "Microsoft.SendActivity",
+              "$designer": {
+                "id": "EQRexX"
+              },
+              "activity": "${SendActivity_EQRexX()}"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "generator": "KonsultacjeMgr-dialog.lg",
+  "recognizer": "KonsultacjeMgr-dialog.lu.qna",
+  "id": "KonsultacjeMgr-dialog"
+}

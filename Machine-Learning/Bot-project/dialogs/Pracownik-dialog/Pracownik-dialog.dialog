@@ -1,0 +1,88 @@
+{
+  "$kind": "Microsoft.AdaptiveDialog",
+  "$designer": {
+    "id": "2pDguO",
+    "name": "Pracownik-dialog",
+    "description": ""
+  },
+  "autoEndDialog": true,
+  "defaultResultProperty": "dialog.result",
+  "triggers": [
+    {
+      "$kind": "Microsoft.OnBeginDialog",
+      "$designer": {
+        "name": "BeginDialog",
+        "description": "",
+        "id": "TAcNDq"
+      },
+      "actions": [
+        {
+          "$kind": "Microsoft.ChoiceInput",
+          "$designer": {
+            "id": "43Fdbg"
+          },
+          "defaultLocale": "en-us",
+          "disabled": false,
+          "maxTurnCount": 3,
+          "alwaysPrompt": false,
+          "allowInterruptions": true,
+          "prompt": "${ChoiceInput_Prompt_43Fdbg()}",
+          "unrecognizedPrompt": "",
+          "invalidPrompt": "",
+          "defaultValueResponse": "",
+          "choiceOptions": {
+            "includeNumbers": true
+          },
+          "property": "user.studyType",
+          "outputFormat": "value",
+          "style": "suggestedAction",
+          "choices": [
+            "Stacjonarne",
+            "Niestacjonarne"
+          ],
+          "recognizerOptions": {
+            "recognizeOrdinals": true,
+            "recognizeNumbers": true
+          }
+        },
+        {
+          "$kind": "Microsoft.SwitchCondition",
+          "$designer": {
+            "id": "StUr49"
+          },
+          "condition": "user.studyType",
+          "cases": [
+            {
+              "value": "Stacjonarne",
+              "actions": [
+                {
+                  "$kind": "Microsoft.BeginDialog",
+                  "$designer": {
+                    "id": "pswUoE"
+                  },
+                  "activityProcessed": true,
+                  "dialog": "KonsultacjePracownik-dialog"
+                }
+              ]
+            },
+            {
+              "value": "Niestacjonarne",
+              "actions": [
+                {
+                  "$kind": "Microsoft.SendActivity",
+                  "$designer": {
+                    "id": "nKvPmN"
+                  },
+                  "activity": "${SendActivity_nKvPmN()}"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "generator": "Pracownik-dialog.lg",
+  "recognizer": "Pracownik-dialog.lu.qna",
+  "id": "Pracownik-dialog"
+}

@@ -1,0 +1,8 @@
+{
+  "$kind": "Microsoft.MultiLanguageRecognizer",
+  "id": "LUIS_Prodziekan-dialog",
+  "recognizers": {
+    "en-us": "Prodziekan-dialog.en-us.lu",
+    "": "Prodziekan-dialog.en-us.lu"
+  }
+}

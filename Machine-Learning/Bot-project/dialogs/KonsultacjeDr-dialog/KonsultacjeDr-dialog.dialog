@@ -1,0 +1,53 @@
+{
+  "$kind": "Microsoft.AdaptiveDialog",
+  "$designer": {
+    "id": "F3klB2",
+    "name": "KonsultacjeDr-dialog",
+    "description": ""
+  },
+  "autoEndDialog": true,
+  "defaultResultProperty": "dialog.result",
+  "triggers": [
+    {
+      "$kind": "Microsoft.OnBeginDialog",
+      "$designer": {
+        "name": "BeginDialog",
+        "description": "",
+        "id": "H0sZmM"
+      },
+      "actions": [
+        {
+          "$kind": "Microsoft.SendActivity",
+          "$designer": {
+            "id": "XNEKyi"
+          },
+          "activity": "${SendActivity_XNEKyi()}"
+        }
+      ]
+    },
+    {
+      "$kind": "Microsoft.OnIntent",
+      "$designer": {
+        "id": "SXQNoZ",
+        "name": "anuluj"
+      },
+      "intent": "anuluj",
+      "actions": [
+        {
+          "$kind": "Microsoft.BeginDialog",
+          "$designer": {
+            "id": "dxKbKp"
+          },
+          "activityProcessed": true,
+          "dialog": "anuluj"
+        }
+      ]
+    }
+  ],
+  "generator": "KonsultacjeDr-dialog.lg",
+  "recognizer": {
+    "$kind": "Microsoft.RegexRecognizer",
+    "intents": []
+  },
+  "id": "KonsultacjeDr-dialog"
+}

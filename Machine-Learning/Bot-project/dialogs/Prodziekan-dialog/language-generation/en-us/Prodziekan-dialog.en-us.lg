@@ -1,0 +1,19 @@
+[import](common.lg)
+
+# ChoiceInput_Prompt_xlpDK7()
+- Czy posiada Pan/Pani status studenta/studentki?
+# SendActivity_6liwWY()
+- Proszę się zarejestrować na konsultację poprzez Wirtualny Dziekanat(ISOD) wybierając "Zapisz na konsultacje" a następnie podając w formularzu nazwisko prodziekana.
+# TextInput_Prompt_GL3kdx()
+- Proszę podać swoje imię i nazwisko
+# NumberInput_Prompt_wECJSp()
+- Proszę podać numer albumu
+# TextInput_Prompt_d2n7i5()
+- Proszę podać adres e-mail
+# SendActivity_Dir6qk()
+- ```Pana/Pani dane to:
+-Imię i nazwisko: ${user.name}
+-Adres E-mail: ${user.email}
+-Nr albumu: ${user.albumNumber}
+Dane zostaną zweryfikowane i na podany adres E-mail otrzyma Pan/Pani numerek w kolejce na konsultacje.
+```

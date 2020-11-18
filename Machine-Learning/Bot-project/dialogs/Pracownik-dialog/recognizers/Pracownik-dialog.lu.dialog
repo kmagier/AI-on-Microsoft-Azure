@@ -1,0 +1,8 @@
+{
+  "$kind": "Microsoft.MultiLanguageRecognizer",
+  "id": "LUIS_Pracownik-dialog",
+  "recognizers": {
+    "en-us": "Pracownik-dialog.en-us.lu",
+    "": "Pracownik-dialog.en-us.lu"
+  }
+}

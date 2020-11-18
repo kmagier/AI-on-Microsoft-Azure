@@ -1,0 +1,8 @@
+{
+  "$kind": "Microsoft.MultiLanguageRecognizer",
+  "id": "LUIS_Wniosek-dialog",
+  "recognizers": {
+    "en-us": "Wniosek-dialog.en-us.lu",
+    "": "Wniosek-dialog.en-us.lu"
+  }
+}

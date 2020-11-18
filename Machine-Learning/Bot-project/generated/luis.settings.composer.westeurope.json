@@ -1,0 +1,28 @@
+{
+    "luis": {
+        "KonsultacjeMgr_dialog_en_us_lu": {
+            "appId": "1267ba12-d951-456a-842c-5bdad6251b38",
+            "version": "0.1"
+        },
+        "Pracownik_dialog_en_us_lu": {
+            "appId": "6393c098-8529-4ad8-9179-6f3084c05fc4",
+            "version": "0.1"
+        },
+        "KonsultacjePracownik_dialog_en_us_lu": {
+            "appId": "4d4b567c-9172-4dfb-948b-c969a8be4cee",
+            "version": "0.1"
+        },
+        "Wniosek_dialog_en_us_lu": {
+            "appId": "f64e5599-c880-4e94-abc8-7fb9b65f5bd5",
+            "version": "0.1"
+        },
+        "Prodziekan_dialog_en_us_lu": {
+            "appId": "ed478fc3-3b02-4770-a4e4-0b63ffb80f51",
+            "version": "0.1"
+        },
+        "Start_en_us_lu": {
+            "appId": "ba99f251-45fa-4496-91c7-75d860c6ff88",
+            "version": "0.1"
+        }
+    }
+}

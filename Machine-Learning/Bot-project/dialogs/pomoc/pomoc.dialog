@@ -1,0 +1,32 @@
+{
+  "$kind": "Microsoft.AdaptiveDialog",
+  "$designer": {
+    "id": "vM6xNz",
+    "name": "pomoc",
+    "description": ""
+  },
+  "autoEndDialog": true,
+  "defaultResultProperty": "dialog.result",
+  "triggers": [
+    {
+      "$kind": "Microsoft.OnBeginDialog",
+      "$designer": {
+        "name": "BeginDialog",
+        "description": "",
+        "id": "xMDgGU"
+      },
+      "actions": [
+        {
+          "$kind": "Microsoft.SendActivity",
+          "$designer": {
+            "id": "EJoI9B"
+          },
+          "activity": "${SendActivity_EJoI9B()}"
+        }
+      ]
+    }
+  ],
+  "generator": "pomoc.lg",
+  "recognizer": "pomoc.lu.qna",
+  "id": "pomoc"
+}

@@ -1,0 +1,8 @@
+{
+  "$kind": "Microsoft.LuisRecognizer",
+  "id": "LUIS_KonsultacjeMgr-dialog",
+  "applicationId": "=settings.luis.KonsultacjeMgr_dialog_en_us_lu.appId",
+  "version": "=settings.luis.KonsultacjeMgr_dialog_en_us_lu.version",
+  "endpoint": "=settings.luis.endpoint",
+  "endpointKey": "=settings.luis.endpointKey"
+}

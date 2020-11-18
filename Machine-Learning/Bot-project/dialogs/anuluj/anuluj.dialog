@@ -1,0 +1,78 @@
+{
+  "$kind": "Microsoft.AdaptiveDialog",
+  "$designer": {
+    "id": "lcNEoq",
+    "name": "anuluj",
+    "description": ""
+  },
+  "autoEndDialog": true,
+  "defaultResultProperty": "dialog.result",
+  "triggers": [
+    {
+      "$kind": "Microsoft.OnBeginDialog",
+      "$designer": {
+        "name": "BeginDialog",
+        "description": "",
+        "id": "ZFzJsn"
+      },
+      "actions": [
+        {
+          "$kind": "Microsoft.SendActivity",
+          "$designer": {
+            "id": "XG2tXW"
+          },
+          "activity": "${SendActivity_XG2tXW()}"
+        },
+        {
+          "$kind": "Microsoft.SendActivity",
+          "$designer": {
+            "id": "yZEWsN"
+          },
+          "activity": "${SendActivity_yZEWsN()}",
+          "disabled": true
+        },
+        {
+          "$kind": "Microsoft.DeleteProperties",
+          "$designer": {
+            "id": "NUvtTT"
+          },
+          "properties": [
+            "user.studentStatus",
+            "user.documentType",
+            "user.choice",
+            "user.studyType",
+            "user.studyLevel",
+            "user.fieldOfStudy"
+          ]
+        },
+        {
+          "$kind": "Microsoft.SendActivity",
+          "$designer": {
+            "id": "p7HaS9"
+          },
+          "activity": "${SendActivity_p7HaS9()}",
+          "disabled": true
+        },
+        {
+          "$kind": "Microsoft.SendActivity",
+          "$designer": {
+            "id": "D4pCtJ"
+          },
+          "activity": "${SendActivity_D4pCtJ()}",
+          "disabled": true
+        },
+        {
+          "$kind": "Microsoft.BeginDialog",
+          "$designer": {
+            "id": "99wxbw"
+          },
+          "activityProcessed": true,
+          "dialog": "Start"
+        }
+      ]
+    }
+  ],
+  "generator": "anuluj.lg",
+  "recognizer": "anuluj.lu.qna",
+  "id": "anuluj"
+}

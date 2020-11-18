@@ -1,0 +1,132 @@
+{
+  "$kind": "Microsoft.AdaptiveDialog",
+  "$designer": {
+    "id": "eANDy7",
+    "name": "Wniosek-dialog",
+    "description": ""
+  },
+  "autoEndDialog": true,
+  "defaultResultProperty": "dialog.result",
+  "triggers": [
+    {
+      "$kind": "Microsoft.OnBeginDialog",
+      "$designer": {
+        "name": "BeginDialog",
+        "description": "",
+        "id": "f5Hxmr"
+      },
+      "actions": [
+        {
+          "$kind": "Microsoft.ChoiceInput",
+          "$designer": {
+            "id": "nI6ta9"
+          },
+          "defaultLocale": "en-us",
+          "disabled": false,
+          "maxTurnCount": 3,
+          "alwaysPrompt": false,
+          "allowInterruptions": true,
+          "prompt": "${ChoiceInput_Prompt_nI6ta9()}",
+          "unrecognizedPrompt": "",
+          "invalidPrompt": "",
+          "defaultValueResponse": "",
+          "choiceOptions": {
+            "includeNumbers": true,
+            "inlineOrMore": ", or ",
+            "inlineOr": " or ",
+            "inlineSeparator": ", "
+          },
+          "property": "user.documentType",
+          "outputFormat": "value",
+          "style": "list",
+          "choices": [
+            "Wniosek o przedłużenie terminu złożenia pracy dyplomowej",
+            "Wniosek o rozłożenie opłaty za studia na raty",
+            "Wniosek o zmniejszenie opłaty za powtarzane przedmioty",
+            "Wniosek o umorzenie opłaty za powtarzanie przedmiotów",
+            "Wniosek o wydanie zaświadczenia o odbywaniu studiów",
+            "Wniosek o transfer przedmiotów",
+            "Podanie o urlop",
+            "Podanie o rejestrację",
+            "Potwierdzenie opłaty(np. za legitymację, powtarzane przedmioty)",
+            "Wniosek ogólny"
+          ],
+          "recognizerOptions": {
+            "recognizeOrdinals": true,
+            "recognizeNumbers": true
+          }
+        },
+        {
+          "$kind": "Microsoft.SendActivity",
+          "$designer": {
+            "id": "f2BViT"
+          },
+          "activity": "${SendActivity_f2BViT()}"
+        },
+        {
+          "$kind": "Microsoft.ChoiceInput",
+          "$designer": {
+            "id": "xXXoH4"
+          },
+          "defaultLocale": "en-us",
+          "disabled": false,
+          "maxTurnCount": 3,
+          "alwaysPrompt": false,
+          "allowInterruptions": true,
+          "prompt": "${ChoiceInput_Prompt_xXXoH4()}",
+          "unrecognizedPrompt": "",
+          "invalidPrompt": "",
+          "defaultValueResponse": "",
+          "choiceOptions": {
+            "includeNumbers": true,
+            "inlineOrMore": ", or "
+          },
+          "property": "user.studentStatus",
+          "style": "suggestedAction",
+          "choices": [
+            "Tak",
+            "Nie"
+          ],
+          "recognizerOptions": {
+            "recognizeOrdinals": true,
+            "recognizeNumbers": true
+          }
+        },
+        {
+          "$kind": "Microsoft.IfCondition",
+          "$designer": {
+            "id": "QGDWfd"
+          },
+          "condition": "=user.studentStatus=='Tak'",
+          "actions": [
+            {
+              "$kind": "Microsoft.SendActivity",
+              "$designer": {
+                "id": "ATDjGK"
+              },
+              "activity": "${SendActivity_ATDjGK()}"
+            }
+          ],
+          "elseActions": [
+            {
+              "$kind": "Microsoft.SendActivity",
+              "$designer": {
+                "id": "ie6snI"
+              },
+              "activity": "${SendActivity_ie6snI()}"
+            }
+          ]
+        },
+        {
+          "$kind": "Microsoft.EndDialog",
+          "$designer": {
+            "id": "ZwzOgD"
+          }
+        }
+      ]
+    }
+  ],
+  "generator": "Wniosek-dialog.lg",
+  "recognizer": "Wniosek-dialog.lu.qna",
+  "id": "Wniosek-dialog"
+}

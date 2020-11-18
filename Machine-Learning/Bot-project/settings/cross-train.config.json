@@ -1,0 +1,28 @@
+{
+  "KonsultacjePracownik-dialog.en-us": {
+    "rootDialog": false,
+    "triggers": {
+      "": [
+        "KonsultacjeMgr-dialog.en-us"
+      ]
+    }
+  },
+  "Pracownik-dialog.en-us": {
+    "rootDialog": false,
+    "triggers": {
+      "": [
+        "KonsultacjePracownik-dialog.en-us"
+      ]
+    }
+  },
+  "Start.en-us": {
+    "rootDialog": false,
+    "triggers": {
+      "": [
+        "Wniosek-dialog.en-us",
+        "Pracownik-dialog.en-us",
+        "Prodziekan-dialog.en-us"
+      ]
+    }
+  }
+}

@@ -1,0 +1,141 @@
+{
+  "$kind": "Microsoft.AdaptiveDialog",
+  "$designer": {
+    "id": "38yZCP",
+    "name": "KonsultacjeInz-dialog",
+    "description": ""
+  },
+  "autoEndDialog": true,
+  "defaultResultProperty": "dialog.result",
+  "triggers": [
+    {
+      "$kind": "Microsoft.OnBeginDialog",
+      "$designer": {
+        "name": "BeginDialog",
+        "description": "",
+        "id": "4Gc8MR"
+      },
+      "actions": [
+        {
+          "$kind": "Microsoft.ChoiceInput",
+          "$designer": {
+            "id": "QxXn0u"
+          },
+          "defaultLocale": "en-us",
+          "disabled": false,
+          "maxTurnCount": 3,
+          "alwaysPrompt": false,
+          "allowInterruptions": true,
+          "prompt": "${ChoiceInput_Prompt_QxXn0u()}",
+          "unrecognizedPrompt": "",
+          "invalidPrompt": "",
+          "defaultValueResponse": "",
+          "choiceOptions": {
+            "includeNumbers": true,
+            "inlineOrMore": ", or ",
+            "inlineOr": " or "
+          },
+          "property": "user.fieldOfStudy",
+          "outputFormat": "value",
+          "style": "suggestedAction",
+          "choices": [
+            "Automatyka i robotyka stosowana",
+            "Elektromobilność",
+            "Elektrotechnika",
+            "Informatyka stosowana"
+          ],
+          "recognizerOptions": {
+            "recognizeOrdinals": true,
+            "recognizeNumbers": true
+          }
+        },
+        {
+          "$kind": "Microsoft.SwitchCondition",
+          "$designer": {
+            "id": "1TZmP8"
+          },
+          "condition": "user.fieldOfStudy",
+          "cases": [
+            {
+              "value": "Automatyka i robotyka stosowana",
+              "actions": [
+                {
+                  "$kind": "Microsoft.SendActivity",
+                  "$designer": {
+                    "id": "NfgGJC"
+                  },
+                  "activity": "${SendActivity_NfgGJC()}"
+                }
+              ]
+            },
+            {
+              "value": "Elektromobilność",
+              "actions": [
+                {
+                  "$kind": "Microsoft.SendActivity",
+                  "$designer": {
+                    "id": "YvvvP0"
+                  },
+                  "activity": "${SendActivity_YvvvP0()}"
+                }
+              ]
+            },
+            {
+              "value": "Elektrotechnika",
+              "actions": [
+                {
+                  "$kind": "Microsoft.SendActivity",
+                  "$designer": {
+                    "id": "Rm7OWW"
+                  },
+                  "activity": "${SendActivity_Rm7OWW()}"
+                }
+              ]
+            },
+            {
+              "value": "Informatyka stosowana",
+              "actions": [
+                {
+                  "$kind": "Microsoft.SendActivity",
+                  "$designer": {
+                    "id": "lDWPpR"
+                  },
+                  "activity": "${SendActivity_lDWPpR()}"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "$kind": "Microsoft.OnIntent",
+      "$designer": {
+        "id": "X13FOu",
+        "name": "anuluj"
+      },
+      "intent": "anuluj",
+      "actions": [
+        {
+          "$kind": "Microsoft.BeginDialog",
+          "$designer": {
+            "id": "hRKzq3"
+          },
+          "activityProcessed": true,
+          "dialog": "anuluj"
+        }
+      ]
+    }
+  ],
+  "generator": "KonsultacjeInz-dialog.lg",
+  "recognizer": {
+    "$kind": "Microsoft.RegexRecognizer",
+    "intents": [
+      {
+        "intent": "anuluj",
+        "pattern": "anuluj"
+      }
+    ]
+  },
+  "id": "KonsultacjeInz-dialog"
+}

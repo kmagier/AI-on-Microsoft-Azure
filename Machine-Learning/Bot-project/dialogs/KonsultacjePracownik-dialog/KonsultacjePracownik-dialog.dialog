@@ -1,0 +1,102 @@
+{
+  "$kind": "Microsoft.AdaptiveDialog",
+  "$designer": {
+    "id": "81a44H",
+    "name": "KonsultacjePracownik-dialog",
+    "description": ""
+  },
+  "autoEndDialog": true,
+  "defaultResultProperty": "dialog.result",
+  "triggers": [
+    {
+      "$kind": "Microsoft.OnBeginDialog",
+      "$designer": {
+        "name": "BeginDialog",
+        "description": "",
+        "id": "EeLS0y"
+      },
+      "actions": [
+        {
+          "$kind": "Microsoft.ChoiceInput",
+          "$designer": {
+            "id": "RwFlTr"
+          },
+          "defaultLocale": "en-us",
+          "disabled": false,
+          "maxTurnCount": 3,
+          "alwaysPrompt": false,
+          "allowInterruptions": true,
+          "prompt": "${ChoiceInput_Prompt_RwFlTr()}",
+          "unrecognizedPrompt": "",
+          "invalidPrompt": "",
+          "defaultValueResponse": "",
+          "choiceOptions": {
+            "includeNumbers": true,
+            "inlineOrMore": ", or "
+          },
+          "property": "user.studyLevel",
+          "outputFormat": "value",
+          "choices": [
+            "Inżynierskie",
+            "Magisterskie",
+            "Doktoranckie"
+          ],
+          "recognizerOptions": {
+            "recognizeOrdinals": true
+          }
+        },
+        {
+          "$kind": "Microsoft.SwitchCondition",
+          "$designer": {
+            "id": "zHgPBL"
+          },
+          "condition": "user.studyLevel",
+          "cases": [
+            {
+              "value": "Inżynierskie",
+              "actions": [
+                {
+                  "$kind": "Microsoft.BeginDialog",
+                  "$designer": {
+                    "id": "Z7d8I5"
+                  },
+                  "activityProcessed": true,
+                  "dialog": "KonsultacjeInz-dialog"
+                }
+              ]
+            },
+            {
+              "value": "Magisterskie",
+              "actions": [
+                {
+                  "$kind": "Microsoft.BeginDialog",
+                  "$designer": {
+                    "id": "TIRYGJ"
+                  },
+                  "activityProcessed": true,
+                  "dialog": "KonsultacjeMgr-dialog"
+                }
+              ]
+            },
+            {
+              "value": "Doktoranckie",
+              "actions": [
+                {
+                  "$kind": "Microsoft.BeginDialog",
+                  "$designer": {
+                    "id": "EaaS9w"
+                  },
+                  "activityProcessed": true,
+                  "dialog": "KonsultacjeDr-dialog"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "generator": "KonsultacjePracownik-dialog.lg",
+  "recognizer": "KonsultacjePracownik-dialog.lu.qna",
+  "id": "KonsultacjePracownik-dialog"
+}

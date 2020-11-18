@@ -1,0 +1,26 @@
+[import](common.lg)
+
+# SendActivity_XG2tXW()
+- Anulowanie...
+# SendActivity_yZEWsN()
+- ```Cancelled
+Variables:
+Status studenta: ${user.studentStatus}
+Typ dokumentu: ${user.documentType}
+Wybór: ${user.choice}
+Typ studiów: ${user.studyType}
+Poziom studiów: ${user.studyLevel}
+Kierunek studiów: ${user.fieldOfStudy}
+```
+# SendActivity_D4pCtJ()
+- ```
+Variables:
+Status studenta: ${user.studentStatus}
+Typ dokumentu: ${user.documentType}
+Wybór: ${user.choice}
+Typ studiów: ${user.studyType}
+Poziom studiów: ${user.studyLevel}
+Kierunek studiów: ${user.fieldOfStudy}
+```
+# SendActivity_p7HaS9()
+- Po usunięciu
