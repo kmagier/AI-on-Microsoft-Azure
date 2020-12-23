@@ -7,7 +7,7 @@ headers = {
     'Prediction-Key': '<prediction-key-here>',
 }
 
-body = "{'Url' : '" + 'https://static.fajnyzwierzak.pl/media/uploads/media_image/auto/entry-content/701/desktop/nowofunland.jpg' + "' }"
+body = "{'Url' : '" + '<link-do-zdjecia>' + "' }"
 
 try:
     conn = http.client.HTTPSConnection('westeurope.api.cognitive.microsoft.com')
